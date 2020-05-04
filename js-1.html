@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>This is Cella Rule 150</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+  <h1>Team ACE </h1>
+  <h4 id="time">Time-stamp: <2019-01-21 20:11:03 Chuck Siska>
+  </h4>
+
+  <canvas id="grid" width="400" height="400"></canvas>
+</body>
+
+<script src="assets/draw-stuff.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+  // after "Introducing JavaScript Game Development" by Stuart.
+
+  // =====================================================  draw_title ====
+  // Draw filled rect.
+  function draw_title(context) {
+    context.save();
+    context.fillStyle = 'lightgrey';
+    context.font = "30px Arial";
+    //context.fillText( "Grid", 150, 140 );
+    context.restore();
+  }
+  // =====================================================  Main ====
+  var canvas = document.getElementById("grid");
+  var context = canvas.getContext("2d");
+  draw_rect(context);
+  // Draw a grid
+  draw_grid(context, 10, 50, 'white', 'yellow');
+  draw_title(context);
+
+  initializeStateArray();
+
+  changeStateArray(context, 0, 19);
+  setTimeout(() => {
+    nextGeneration();
+  }, 2000);
+
+  // =====================================================  date_and_time ====
+  (function () {
+    function checkLength(i) {
+      return (i.toString().length == 1) ? "0" + i : i;
+    }
+    function getDateTime() {
+      var now = new Date(),
+        year = now.getFullYear(),
+        month = checkLength(now.getMonth() + 1),
+        day = checkLength(now.getDate()),
+        hour = checkLength(now.getHours()),
+        minute = checkLength(now.getMinutes()),
+        second = checkLength(now.getSeconds());
+      document.getElementById('time').innerHTML = 'Timestamp : ' + year + '-' + month + '-' + day + ' ' + hour + ":" + minute + ":" + second;
+      t = setTimeout(function () {
+        getDateTime()
+      }, 500);
+    }
+    getDateTime();
+  })();
+</script>
+
+</html>
