@@ -8,6 +8,8 @@ let ruleset = [1, 0, 0, 1, 0, 1, 1, 0];
 let stateArray = [];
 
 function draw_rect(ctx, stroke, fill) {
+    console.log("This is Test");
+    console.log("Test PR")
     stroke = stroke || 'lightgrey';
     fill = fill || 'dimgrey';
     ctx.save();
